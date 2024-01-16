@@ -17,7 +17,7 @@ public class ChessPosition {
 
     /**
      * @return which row this position is in
-     * 1 codes for the bottom row
+     * 1 codes for the left row
      */
     public int getRow() {
         return this.row;
@@ -25,7 +25,7 @@ public class ChessPosition {
 
     /**
      * @return which column this position is in
-     * 1 codes for the left row
+     * 1 codes for the bottom column
      */
     public int getColumn() {
         return this.col;
