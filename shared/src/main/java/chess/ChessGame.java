@@ -49,6 +49,13 @@ public class ChessGame {
      * startPosition
      */
     public Collection<ChessMove> validMoves(ChessPosition startPosition) {
+
+        ChessPiece startPiece = this.board.getPiece(startPosition);
+        if (startPiece == null){
+            return null;
+        }
+
+
         throw new RuntimeException("Not implemented");
     }
 
@@ -100,7 +107,6 @@ public class ChessGame {
      */
     public void setBoard(ChessBoard board) {
         this.board = board;
-        throw new RuntimeException("Not implemented");
     }
 
     /**
