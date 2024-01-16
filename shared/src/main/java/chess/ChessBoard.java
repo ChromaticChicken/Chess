@@ -13,7 +13,8 @@ public class ChessBoard {
 
 
     public ChessBoard() {
-        // this.resetBoard();
+        this.pieceArray = new ChessPiece[8][8];
+        this.resetBoard();
     }
 
     /**
@@ -72,4 +73,5 @@ public class ChessBoard {
             this.addPiece(new ChessPosition(i, 7), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.PAWN));
         }
     }
+
 }
