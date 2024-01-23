@@ -9,7 +9,7 @@ public class BishopMovesCalculator implements ChessMovesCalculator{
 
     @Override
     public Collection<ChessMove> validMoves(ChessPosition startPosition, ChessBoard board) {
-        HashSet<ChessMove> moveList = new HashSet<>();
+        HashSet<ChessMove> moveSet = new HashSet<>();
 
         ChessGame.TeamColor color = board.getPiece(startPosition).getTeamColor();
         int startX = startPosition.getRow();
@@ -25,13 +25,13 @@ public class BishopMovesCalculator implements ChessMovesCalculator{
             y++;
             ChessPosition endPosition = new ChessPosition(x, y);
             if (board.getPiece(endPosition) != null){
-                if (board.getPiece(endPosition).getTeamColor() == color) {
+                if (board.getPiece(endPosition).getTeamColor() == color){
                     break;
                 }
-                moveList.add(new ChessMove(startPosition, endPosition, null));
+                moveSet.add(new ChessMove(startPosition, endPosition, null));
                 break;
             }
-            moveList.add(new ChessMove(startPosition, endPosition, null));
+            moveSet.add(new ChessMove(startPosition, endPosition, null));
         }
 
         // reset x and y
@@ -44,13 +44,13 @@ public class BishopMovesCalculator implements ChessMovesCalculator{
             y++;
             ChessPosition endPosition = new ChessPosition(x, y);
             if (board.getPiece(endPosition) != null){
-                if (board.getPiece(endPosition).getTeamColor() == color) {
+                if (board.getPiece(endPosition).getTeamColor() == color){
                     break;
                 }
-                moveList.add(new ChessMove(startPosition, endPosition, null));
+                moveSet.add(new ChessMove(startPosition, endPosition, null));
                 break;
             }
-            moveList.add(new ChessMove(startPosition, endPosition, null));
+            moveSet.add(new ChessMove(startPosition, endPosition, null));
         }
         x = startX;
         y = startY;
@@ -60,13 +60,13 @@ public class BishopMovesCalculator implements ChessMovesCalculator{
             y--;
             ChessPosition endPosition = new ChessPosition(x, y);
             if (board.getPiece(endPosition) != null){
-                if (board.getPiece(endPosition).getTeamColor() == color) {
+                if (board.getPiece(endPosition).getTeamColor() == color){
                     break;
                 }
-                moveList.add(new ChessMove(startPosition, endPosition, null));
+                moveSet.add(new ChessMove(startPosition, endPosition, null));
                 break;
             }
-            moveList.add(new ChessMove(startPosition, endPosition, null));
+            moveSet.add(new ChessMove(startPosition, endPosition, null));
         }
         x = startX;
         y = startY;
@@ -76,15 +76,15 @@ public class BishopMovesCalculator implements ChessMovesCalculator{
             y--;
             ChessPosition endPosition = new ChessPosition(x, y);
             if (board.getPiece(endPosition) != null){
-                if (board.getPiece(endPosition).getTeamColor() == color) {
+                if (board.getPiece(endPosition).getTeamColor() == color){
                     break;
                 }
-                moveList.add(new ChessMove(startPosition, endPosition, null));
+                moveSet.add(new ChessMove(startPosition, endPosition, null));
                 break;
             }
-            moveList.add(new ChessMove(startPosition, endPosition, null));
+            moveSet.add(new ChessMove(startPosition, endPosition, null));
         }
 
-        return moveList;
+        return moveSet;
     }
 }
