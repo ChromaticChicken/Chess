@@ -3,7 +3,7 @@ package chess;
 import java.util.Collection;
 import java.util.HashSet;
 
-public class QueenMoveCalculator implements ChessMovesCalculator{
+public class RookMovesCalculator implements ChessMovesCalculator{
 
     @Override
     public Collection<ChessMove> validMoves(ChessPosition startPosition, ChessBoard board) {
@@ -16,72 +16,6 @@ public class QueenMoveCalculator implements ChessMovesCalculator{
         // init x and y
         int y = startY;
         int x = startX;
-
-        // copy of Bishop moves
-        // check the +x +y direction
-        while (x < 8 && y < 8 ){
-            x++;
-            y++;
-            ChessPosition endPosition = new ChessPosition(y, x);
-            if (board.getPiece(endPosition) != null){
-                if (board.getPiece(endPosition).getTeamColor() == color){
-                    break;
-                }
-                moveSet.add(new ChessMove(startPosition, endPosition, null));
-                break;
-            }
-            moveSet.add(new ChessMove(startPosition, endPosition, null));
-        }
-        x = startX;
-        y = startY;
-        // check the -x +y direction
-        while (x > 1 && y < 8){
-            x--;
-            y++;
-            ChessPosition endPosition = new ChessPosition(y, x);
-            if (board.getPiece(endPosition) != null){
-                if (board.getPiece(endPosition).getTeamColor() == color){
-                    break;
-                }
-                moveSet.add(new ChessMove(startPosition, endPosition, null));
-                break;
-            }
-            moveSet.add(new ChessMove(startPosition, endPosition, null));
-        }
-        x = startX;
-        y = startY;
-        // check the -x -y direction
-        while (x > 1 && y > 1){
-            x--;
-            y--;
-            ChessPosition endPosition = new ChessPosition(y, x);
-            if (board.getPiece(endPosition) != null){
-                if (board.getPiece(endPosition).getTeamColor() == color){
-                    break;
-                }
-                moveSet.add(new ChessMove(startPosition, endPosition, null));
-                break;
-            }
-            moveSet.add(new ChessMove(startPosition, endPosition, null));
-        }
-        x = startX;
-        y = startY;
-        // check the +x -y direction
-        while (x < 8 && y > 1){
-            x++;
-            y--;
-            ChessPosition endPosition = new ChessPosition(y, x);
-            if (board.getPiece(endPosition) != null){
-                if (board.getPiece(endPosition).getTeamColor() == color){
-                    break;
-                }
-                moveSet.add(new ChessMove(startPosition, endPosition, null));
-                break;
-            }
-            moveSet.add(new ChessMove(startPosition, endPosition, null));
-        }
-        x = startX;
-        y = startY;
         // check the +x direction
         while (x < 8){
             x++;

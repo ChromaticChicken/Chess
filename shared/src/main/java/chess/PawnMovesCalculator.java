@@ -3,7 +3,7 @@ package chess;
 import java.util.Collection;
 import java.util.HashSet;
 
-public class PawnMoveCalculator implements ChessMovesCalculator{
+public class PawnMovesCalculator implements ChessMovesCalculator{
 
     @Override
     public Collection<ChessMove> validMoves(ChessPosition startPosition, ChessBoard board) {
