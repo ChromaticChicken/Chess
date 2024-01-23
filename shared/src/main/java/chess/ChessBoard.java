@@ -14,7 +14,6 @@ public class ChessBoard {
 
     public ChessBoard() {
         this.pieceArray = new ChessPiece[8][8];
-        this.resetBoard();
     }
 
     /**
@@ -24,10 +23,22 @@ public class ChessBoard {
      * @param piece    the piece to add
      */
     public void addPiece(ChessPosition position, ChessPiece piece) {
-        int x = position.getColumn();
-        int y = position.getRow();
+        int x = position.getRow();
+        int y = position.getColumn();
 
         this.pieceArray[x-1][y-1] = piece;
+    }
+
+    public void movePiece(ChessMove move) throws InvalidMoveException {
+        ChessPosition start = move.getStartPosition();
+        ChessPosition end = move.getEndPosition();
+
+        ChessPiece piece = this.getPiece(start);
+        int startX = start.getRow();
+        int startY = start.getColumn();
+        this.pieceArray[startX-1][startY-1] = null;
+
+        this.addPiece(end, piece);
     }
 
     /**
@@ -38,8 +49,8 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
-        int x = position.getColumn();
-        int y = position.getRow();
+        int x = position.getRow();
+        int y = position.getColumn();
 
         return this.pieceArray[x-1][y-1];
     }
