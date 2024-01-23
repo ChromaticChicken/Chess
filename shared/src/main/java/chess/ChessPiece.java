@@ -61,7 +61,10 @@ public class ChessPiece {
             myCalculator = new KingMovesCalculator();
         } else if (this.type == PieceType.KNIGHT) {
             myCalculator = new KnightMovesCalculator();
-        } else {
+        } else if (this.type == PieceType.PAWN) {
+            myCalculator = new PawnMoveCalculator();
+        }
+        else {
             return new HashSet<>();
         }
 

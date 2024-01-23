@@ -9,40 +9,40 @@ public class KingMovesCalculator implements ChessMovesCalculator{
     public Collection<ChessMove> validMoves(ChessPosition startPosition, ChessBoard board) {
         HashSet<ChessMove> moveSet = new HashSet<>();
 
-        int x = startPosition.getRow();
-        int y = startPosition.getColumn();
+        int y = startPosition.getRow();
+        int x = startPosition.getColumn();
         ChessGame.TeamColor color = board.getPiece(startPosition).getTeamColor();
 
         ChessPosition endPosition;
         if (x > 1){
-            endPosition = new ChessPosition(x-1, y);
+            endPosition = new ChessPosition(y, x-1);
             CheckSquare(startPosition, board, moveSet, color, endPosition);
             if (y > 1) {
-                endPosition = new ChessPosition(x-1, y-1);
+                endPosition = new ChessPosition(y-1, x-1);
                 CheckSquare(startPosition, board, moveSet, color, endPosition);
             }
             if (y < 8) {
-                endPosition = new ChessPosition(x-1, y+1);
+                endPosition = new ChessPosition(y+1, x-1);
                 CheckSquare(startPosition, board, moveSet, color, endPosition);
             }
         }
         if (y > 1) {
-            endPosition = new ChessPosition(x, y-1);
+            endPosition = new ChessPosition(y-1, x);
             CheckSquare(startPosition, board, moveSet, color, endPosition);
         }
         if (y < 8) {
-            endPosition = new ChessPosition(x, y+1);
+            endPosition = new ChessPosition(y+1, x);
             CheckSquare(startPosition, board, moveSet, color, endPosition);
         }
         if (x < 8) {
-            endPosition = new ChessPosition(x+1, y);
+            endPosition = new ChessPosition(y, x+1);
             CheckSquare(startPosition, board, moveSet, color, endPosition);
             if (y > 1) {
-                endPosition = new ChessPosition(x+1, y-1);
+                endPosition = new ChessPosition(y-1, x+1);
                 CheckSquare(startPosition, board, moveSet, color, endPosition);
             }
             if (y < 8) {
-                endPosition = new ChessPosition(x+1, y+1);
+                endPosition = new ChessPosition(y+1, x+1);
                 CheckSquare(startPosition, board, moveSet, color, endPosition);
             }
         }

@@ -12,18 +12,18 @@ public class BishopMovesCalculator implements ChessMovesCalculator{
         HashSet<ChessMove> moveSet = new HashSet<>();
 
         ChessGame.TeamColor color = board.getPiece(startPosition).getTeamColor();
-        int startX = startPosition.getRow();
-        int startY = startPosition.getColumn();
+        int startY = startPosition.getRow();
+        int startX = startPosition.getColumn();
 
         // init x and y
-        int x = startX;
         int y = startY;
+        int x = startX;
 
         // check the +x +y direction
         while (x < 8 && y < 8 ){
             x++;
             y++;
-            ChessPosition endPosition = new ChessPosition(x, y);
+            ChessPosition endPosition = new ChessPosition(y, x);
             if (board.getPiece(endPosition) != null){
                 if (board.getPiece(endPosition).getTeamColor() == color){
                     break;
@@ -42,7 +42,7 @@ public class BishopMovesCalculator implements ChessMovesCalculator{
         while (x > 1 && y < 8){
             x--;
             y++;
-            ChessPosition endPosition = new ChessPosition(x, y);
+            ChessPosition endPosition = new ChessPosition(y, x);
             if (board.getPiece(endPosition) != null){
                 if (board.getPiece(endPosition).getTeamColor() == color){
                     break;
@@ -58,7 +58,7 @@ public class BishopMovesCalculator implements ChessMovesCalculator{
         while (x > 1 && y > 1){
             x--;
             y--;
-            ChessPosition endPosition = new ChessPosition(x, y);
+            ChessPosition endPosition = new ChessPosition(y, x);
             if (board.getPiece(endPosition) != null){
                 if (board.getPiece(endPosition).getTeamColor() == color){
                     break;
@@ -74,7 +74,7 @@ public class BishopMovesCalculator implements ChessMovesCalculator{
         while (x < 8 && y > 1){
             x++;
             y--;
-            ChessPosition endPosition = new ChessPosition(x, y);
+            ChessPosition endPosition = new ChessPosition(y, x);
             if (board.getPiece(endPosition) != null){
                 if (board.getPiece(endPosition).getTeamColor() == color){
                     break;
