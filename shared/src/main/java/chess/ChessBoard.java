@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.Arrays;
+
 /**
  * A chessboard that can hold and rearrange chess pieces.
  * <p>
@@ -75,8 +77,8 @@ public class ChessBoard {
         this.addPiece(new ChessPosition(8, 1), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK));
         this.addPiece(new ChessPosition(8, 2), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT));
         this.addPiece(new ChessPosition(8, 3), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP));
-        this.addPiece(new ChessPosition(8, 4), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KING));
-        this.addPiece(new ChessPosition(8, 5), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.QUEEN));
+        this.addPiece(new ChessPosition(8, 4), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.QUEEN));
+        this.addPiece(new ChessPosition(8, 5), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KING));
         this.addPiece(new ChessPosition(8, 6), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP));
         this.addPiece(new ChessPosition(8, 7), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT));
         this.addPiece(new ChessPosition(8, 8), new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK));
@@ -85,4 +87,42 @@ public class ChessBoard {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChessBoard that = (ChessBoard) o;
+        return Arrays.deepEquals(pieceArray, that.pieceArray);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(pieceArray);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (pieceArray[i][j] == null){
+                    output.append(" _ ");
+                } else if (pieceArray[i][j].getPieceType() == ChessPiece.PieceType.PAWN) {
+                    output.append(" P ");
+                } else if (pieceArray[i][j].getPieceType() == ChessPiece.PieceType.ROOK) {
+                    output.append(" R ");
+                } else if (pieceArray[i][j].getPieceType() == ChessPiece.PieceType.KNIGHT) {
+                    output.append(" N ");
+                } else if (pieceArray[i][j].getPieceType() == ChessPiece.PieceType.BISHOP) {
+                    output.append(" B ");
+                } else if (pieceArray[i][j].getPieceType() == ChessPiece.PieceType.KING) {
+                    output.append(" K ");
+                } else if (pieceArray[i][j].getPieceType() == ChessPiece.PieceType.QUEEN) {
+                    output.append(" Q ");
+                }
+            }
+            output.append("\n");
+        }
+        return output.toString();
+    }
 }
