@@ -54,9 +54,16 @@ public class ChessGame {
         if (startPiece == null){
             return null;
         }
+        ChessPiece.PieceType pieceType = startPiece.getPieceType();
+        ChessMovesCalculator myCalculator;
+        if (pieceType == ChessPiece.PieceType.BISHOP){
+            myCalculator = new BishopMovesCalculator();
+        }
+        else {
+            throw new RuntimeException("Not implemented");
+        }
 
-
-        throw new RuntimeException("Not implemented");
+        return myCalculator.validMoves(startPosition, this.board);
     }
 
     /**
