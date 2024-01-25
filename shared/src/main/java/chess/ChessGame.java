@@ -1,6 +1,7 @@
 package chess;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * For a class that can manage a chess game, making moves on a board
@@ -39,6 +40,50 @@ public class ChessGame {
     public enum TeamColor {
         WHITE,
         BLACK
+    }
+
+    /**
+     * Gets all valid moves for the given team
+     * Currently does not account for leaving the king in check/checkmate
+     *
+     * @param team the team to get valid moves for
+     * @return Set of all valid moves for requested team, or null if no valid moves
+     */
+    private Collection<ChessMove> allValidMoves(ChessGame.TeamColor team) {
+        HashSet<ChessMove> moveSet = new HashSet<>();
+        ChessPosition startPosition;
+        ChessMovesCalculator myCalculator;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                startPosition = new ChessPosition(i+1, j+1);
+                ChessPiece startPiece = this.board.getPiece(startPosition);
+                if (startPiece == null || startPiece.getTeamColor() != team){
+                    continue;
+                }
+                ChessPiece.PieceType pieceType = startPiece.getPieceType();
+                if (pieceType == ChessPiece.PieceType.ROOK){
+                    myCalculator = new RookMovesCalculator();
+                }
+                else if (pieceType == ChessPiece.PieceType.KNIGHT){
+                    myCalculator = new KnightMovesCalculator();
+                }
+                else if (pieceType == ChessPiece.PieceType.BISHOP){
+                    myCalculator = new BishopMovesCalculator();
+                }
+                else if (pieceType == ChessPiece.PieceType.KING){
+                    myCalculator = new KingMovesCalculator();
+                }
+                else if (pieceType == ChessPiece.PieceType.QUEEN){
+                    myCalculator = new QueenMovesCalculator();
+                }
+                else{
+                    myCalculator = new PawnMovesCalculator();
+                }
+                moveSet.addAll(myCalculator.validMoves(startPosition, this.board));
+            }
+        }
+
+        return moveSet;
     }
 
     /**
