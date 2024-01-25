@@ -34,13 +34,19 @@ public class ChessBoard {
     public void movePiece(ChessMove move) throws InvalidMoveException {
         ChessPosition start = move.getStartPosition();
         ChessPosition end = move.getEndPosition();
+        ChessPiece.PieceType promotion = move.getPromotionPiece();
 
         ChessPiece piece = this.getPiece(start);
         int startX = start.getRow();
         int startY = start.getColumn();
         this.pieceArray[startX-1][startY-1] = null;
 
-        this.addPiece(end, piece);
+        if (promotion == null){
+            this.addPiece(end, piece);
+        }
+        else {
+            this.addPiece(end, new ChessPiece(piece.getTeamColor(), promotion));
+        }
     }
 
     /**
