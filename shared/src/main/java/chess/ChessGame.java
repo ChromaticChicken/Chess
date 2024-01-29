@@ -128,6 +128,14 @@ public class ChessGame {
      * @return True if the specified team is in check
      */
     public boolean isInCheck(TeamColor teamColor) {
+        HashSet<ChessMove> otherTeamsMoves = new HashSet<>();
+        if (teamColor == TeamColor.WHITE) {
+            otherTeamsMoves.addAll(this.allValidMoves(TeamColor.BLACK));
+        } else {
+            otherTeamsMoves.addAll(this.allValidMoves(TeamColor.WHITE));
+        }
+
+
         throw new RuntimeException("Not implemented");
     }
 
