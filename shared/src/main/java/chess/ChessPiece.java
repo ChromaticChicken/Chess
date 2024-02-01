@@ -14,7 +14,7 @@ public class ChessPiece {
     private final ChessGame.TeamColor pieceColor;
     private final ChessPiece.PieceType type;
 
-    private boolean movedTwoSpaces; //Used for pawns only for en passant
+    private boolean movedTwoSpaces; //Used for pawns for en passant
 
     private boolean hasMoved; //Used for kings and rooks for castling
 
