@@ -158,7 +158,7 @@ public class PawnMovesCalculator implements ChessMovesCalculator{
                     moveSet.add(new ChessMove(startPosition, new ChessPosition(y-2, x), null));
                 }
             }
-            // if on 5th column potentially add en passant
+            // if on 4th column potentially add en passant
             // I still need to add and remove the movedTwoSpaces from the enemy pawn I think that should happen within ChessGame
             if (y == 4) {
                 if (x < 8)  {
