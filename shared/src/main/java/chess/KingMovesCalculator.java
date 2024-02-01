@@ -46,6 +46,39 @@ public class KingMovesCalculator implements ChessMovesCalculator{
                 CheckSquare(startPosition, board, moveSet, color, endPosition);
             }
         }
+
+        // add castling
+        // if white
+        if (color == ChessGame.TeamColor.WHITE) {
+            // castle long
+            if (!board.getPiece(startPosition).isHasMoved() && board.getPiece(new ChessPosition(1, 1)) != null && board.getPiece(new ChessPosition(1,2)) == null && board.getPiece(new ChessPosition(1,3)) == null && board.getPiece(new ChessPosition(1, 4)) == null){
+                if (board.getPiece(new ChessPosition(1,1 )).getPieceType() == ChessPiece.PieceType.ROOK && !board.getPiece(new ChessPosition(1, 1)).isHasMoved()){
+                    moveSet.add(new ChessMove(startPosition, new ChessPosition(1, 3), null));
+                }
+            }
+            // castle short
+            if (!board.getPiece(startPosition).isHasMoved() && board.getPiece(new ChessPosition(1, 8)) != null && board.getPiece(new ChessPosition(1,7)) == null && board.getPiece(new ChessPosition(1,6)) == null){
+                if (board.getPiece(new ChessPosition(1,1 )).getPieceType() == ChessPiece.PieceType.ROOK && !board.getPiece(new ChessPosition(1, 8)).isHasMoved()){
+                    moveSet.add(new ChessMove(startPosition, new ChessPosition(1, 7), null));
+                }
+            }
+        }
+        // if black
+        if (color == ChessGame.TeamColor.BLACK) {
+            // castle long
+            if (!board.getPiece(startPosition).isHasMoved() && board.getPiece(new ChessPosition(8, 1)) != null && board.getPiece(new ChessPosition(8,2)) == null && board.getPiece(new ChessPosition(8,3)) == null && board.getPiece(new ChessPosition(8, 4)) == null){
+                if (board.getPiece(new ChessPosition(8,1 )).getPieceType() == ChessPiece.PieceType.ROOK && !board.getPiece(new ChessPosition(8, 1)).isHasMoved()){
+                    moveSet.add(new ChessMove(startPosition, new ChessPosition(8, 3), null));
+                }
+            }
+            // castle short
+            if (!board.getPiece(startPosition).isHasMoved() && board.getPiece(new ChessPosition(8, 8)) != null && board.getPiece(new ChessPosition(8,7)) == null && board.getPiece(new ChessPosition(8,6)) == null){
+                if (board.getPiece(new ChessPosition(8,1 )).getPieceType() == ChessPiece.PieceType.ROOK && !board.getPiece(new ChessPosition(8, 8)).isHasMoved()){
+                    moveSet.add(new ChessMove(startPosition, new ChessPosition(8, 7), null));
+                }
+            }
+        }
+
         return moveSet;
     }
 
