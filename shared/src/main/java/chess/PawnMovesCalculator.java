@@ -81,6 +81,21 @@ public class PawnMovesCalculator implements ChessMovesCalculator{
                     moveSet.add(new ChessMove(startPosition, new ChessPosition(y+2, x), null));
                 }
             }
+            // if on 5th column potentially add en passant
+            // I still need to add and remove the movedTwoSpaces from the enemy pawn I think that should happen within ChessGame
+            if (y == 5) {
+                if (x < 8)  {
+                    if (board.getPiece(new ChessPosition(y, x+1)).getPieceType() == ChessPiece.PieceType.PAWN && board.getPiece(new ChessPosition(y, x+1)).isMovedTwoSpaces()) {
+                        moveSet.add(new ChessMove(startPosition, new ChessPosition(y+1, x+1), null));
+                    }
+                }
+                if (x > 1) {
+                    if (board.getPiece(new ChessPosition(y, x-1)).getPieceType() == ChessPiece.PieceType.PAWN && board.getPiece(new ChessPosition(y, x-1)).isMovedTwoSpaces()) {
+                        moveSet.add(new ChessMove(startPosition, new ChessPosition(y+1, x-1), null));
+                    }
+                }
+
+            }
         }
 
         // if black (moving in -y direction)
