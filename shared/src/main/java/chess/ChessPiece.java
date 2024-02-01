@@ -14,9 +14,31 @@ public class ChessPiece {
     private final ChessGame.TeamColor pieceColor;
     private final ChessPiece.PieceType type;
 
+    private boolean movedTwoSpaces; //Used for pawns only for en passant
+
+    private boolean hasMoved; //Used for kings and rooks for castling
+
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
         this.pieceColor = pieceColor;
         this.type = type;
+        this.movedTwoSpaces = false;
+        this.hasMoved = false;
+    }
+
+    public boolean isMovedTwoSpaces() {
+        return movedTwoSpaces;
+    }
+
+    public boolean isHasMoved() {
+        return hasMoved;
+    }
+
+    public void setHasMoved(boolean hasMoved) {
+        this.hasMoved = hasMoved;
+    }
+
+    public void setMovedTwoSpaces(boolean movedTwoSpaces) {
+        this.movedTwoSpaces = movedTwoSpaces;
     }
 
     /**
@@ -79,11 +101,11 @@ public class ChessPiece {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ChessPiece that = (ChessPiece) o;
-        return pieceColor == that.pieceColor && type == that.type;
+        return movedTwoSpaces == that.movedTwoSpaces && hasMoved == that.hasMoved && pieceColor == that.pieceColor && type == that.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pieceColor, type);
+        return Objects.hash(pieceColor, type, movedTwoSpaces, hasMoved);
     }
 }
