@@ -93,6 +93,19 @@ public class ChessBoard {
         }
     }
 
+    public ChessBoard copy(){
+        ChessBoard copy = new ChessBoard();
+        copy.resetBoard();
+
+        for (int i = 1; i < 9; i++) {
+            for (int j = 1; j < 9; j++) {
+                copy.addPiece(new ChessPosition(i,j), getPiece(new ChessPosition(i,j)));
+            }
+        }
+
+        return copy;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

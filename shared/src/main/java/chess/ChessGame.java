@@ -160,7 +160,27 @@ public class ChessGame {
      * @return True if the specified team is in checkmate
      */
     public boolean isInCheckmate(TeamColor teamColor) {
-        throw new RuntimeException("Not implemented");
+        if (!isInCheck(teamColor)) {
+            return false;
+        }
+
+        HashSet<ChessMove> possibleMoves = (HashSet<ChessMove>) allValidMoves(teamColor);
+        ChessBoard copyBoard;
+
+        for (ChessMove move: possibleMoves) {
+            copyBoard = board.copy();
+            try {
+                copyBoard.movePiece(move);
+                if (!isInCheck(teamColor)) {
+                    return false;
+                }
+            }
+            catch (InvalidMoveException e) {
+                continue;
+            }
+        }
+
+        return true;
     }
 
     /**
