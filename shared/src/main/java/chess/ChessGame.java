@@ -165,13 +165,16 @@ public class ChessGame {
         }
 
         HashSet<ChessMove> possibleMoves = (HashSet<ChessMove>) allValidMoves(teamColor);
+        ChessBoard originalBoard = board;
         ChessBoard copyBoard;
 
         for (ChessMove move: possibleMoves) {
-            copyBoard = board.copy();
+            copyBoard = originalBoard.copy();
+            board = copyBoard;
             try {
                 copyBoard.movePiece(move);
                 if (!isInCheck(teamColor)) {
+                    board = originalBoard;
                     return false;
                 }
             }
@@ -180,6 +183,7 @@ public class ChessGame {
             }
         }
 
+        board = originalBoard;
         return true;
     }
 
@@ -191,7 +195,33 @@ public class ChessGame {
      * @return True if the specified team is in stalemate, otherwise false
      */
     public boolean isInStalemate(TeamColor teamColor) {
-        throw new RuntimeException("Not implemented");
+        if (isInCheck(teamColor)) {
+            return false;
+        }
+
+        HashSet<ChessMove> possibleMoves = (HashSet<ChessMove>) allValidMoves(teamColor);
+        ChessBoard originalBoard = board;
+        ChessBoard copyBoard;
+
+
+        for (ChessMove move: possibleMoves) {
+            copyBoard = board.copy();
+            board = copyBoard;
+
+            try {
+                copyBoard.movePiece(move);
+                if (!isInCheck(teamColor)) {
+                    board = originalBoard;
+                    return false;
+                }
+            }
+            catch (InvalidMoveException e) {
+                continue;
+            }
+        }
+
+        board = originalBoard;
+        return true;
     }
 
     /**
