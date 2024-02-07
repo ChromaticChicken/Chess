@@ -32,6 +32,9 @@ public class ChessBoard {
     }
 
     public void movePiece(ChessMove move) throws InvalidMoveException {
+
+
+
         ChessPosition start = move.getStartPosition();
         ChessPosition end = move.getEndPosition();
         ChessPiece.PieceType promotion = move.getPromotionPiece();

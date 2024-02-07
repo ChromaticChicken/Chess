@@ -103,6 +103,7 @@ public class ChessGame {
 
         ChessBoard originalBoard = board;
         ChessBoard copyBoard;
+        ChessGame.TeamColor originalTeam = turnColor;
         ChessGame.TeamColor teamColor = board.getPiece(startPosition).getTeamColor();
 
         HashSet<ChessMove> validPieceMoves = new HashSet<>();
@@ -111,7 +112,7 @@ public class ChessGame {
             copyBoard = originalBoard.copy();
             board = copyBoard;
             try {
-                makeMove(move);
+                board.movePiece(move);
                 if (!isInCheck(teamColor)) {
                     validPieceMoves.add(move);
                 }
@@ -122,6 +123,7 @@ public class ChessGame {
         }
 
         board = originalBoard;
+        turnColor = originalTeam;
         return validPieceMoves;
     }
 
@@ -132,7 +134,21 @@ public class ChessGame {
      * @throws InvalidMoveException if move is invalid
      */
     public void makeMove(ChessMove move) throws InvalidMoveException {
+        if (board.getPiece(move.getStartPosition()).getTeamColor() != turnColor) {
+            throw new InvalidMoveException();
+        }
+        HashSet<ChessMove> possibleMoves = (HashSet<ChessMove>) validMoves(move.getStartPosition());
+        if (!possibleMoves.contains(move)){
+            throw new InvalidMoveException();
+        }
+
         this.board.movePiece(move);
+        if (turnColor == TeamColor.WHITE) {
+            turnColor = TeamColor.BLACK;
+        }
+        else {
+            turnColor = TeamColor.WHITE;
+        }
     }
 
     /**
@@ -180,6 +196,7 @@ public class ChessGame {
 
         HashSet<ChessMove> possibleMoves = (HashSet<ChessMove>) allValidMoves(teamColor);
         ChessBoard originalBoard = board;
+        ChessGame.TeamColor originalTeam = teamColor;
         ChessBoard copyBoard;
 
         for (ChessMove move: possibleMoves) {
@@ -198,6 +215,7 @@ public class ChessGame {
         }
 
         board = originalBoard;
+        turnColor = originalTeam;
         return true;
     }
 
@@ -215,6 +233,7 @@ public class ChessGame {
 
         HashSet<ChessMove> possibleMoves = (HashSet<ChessMove>) allValidMoves(teamColor);
         ChessBoard originalBoard = board;
+        ChessGame.TeamColor originalTeam = teamColor;
         ChessBoard copyBoard;
 
 
@@ -235,6 +254,7 @@ public class ChessGame {
         }
 
         board = originalBoard;
+        turnColor = originalTeam;
         return true;
     }
 
