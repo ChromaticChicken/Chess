@@ -99,16 +99,30 @@ public class ChessGame {
         if (startPiece == null){
             return null;
         }
-        ChessPiece.PieceType pieceType = startPiece.getPieceType();
-        ChessMovesCalculator myCalculator;
-        if (pieceType == ChessPiece.PieceType.BISHOP){
-            myCalculator = new BishopMovesCalculator();
-        }
-        else {
-            throw new RuntimeException("Not implemented");
+        HashSet<ChessMove> pieceMoves = (HashSet<ChessMove>) startPiece.pieceMoves(board, startPosition);
+
+        ChessBoard originalBoard = board;
+        ChessBoard copyBoard;
+        ChessGame.TeamColor teamColor = board.getPiece(startPosition).getTeamColor();
+
+        HashSet<ChessMove> validPieceMoves = new HashSet<>();
+
+        for (ChessMove move: pieceMoves) {
+            copyBoard = originalBoard.copy();
+            board = copyBoard;
+            try {
+                makeMove(move);
+                if (!isInCheck(teamColor)) {
+                    validPieceMoves.add(move);
+                }
+            }
+            catch (InvalidMoveException e) {
+                continue;
+            }
         }
 
-        return myCalculator.validMoves(startPosition, this.board);
+        board = originalBoard;
+        return validPieceMoves;
     }
 
     /**

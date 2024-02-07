@@ -127,17 +127,47 @@ public class ChessBoard {
                 if (pieceArray[i][j] == null){
                     output.append(" _ ");
                 } else if (pieceArray[i][j].getPieceType() == ChessPiece.PieceType.PAWN) {
-                    output.append(" P ");
+                    if (pieceArray[i][j].getTeamColor() == ChessGame.TeamColor.WHITE) {
+                        output.append(" P ");
+                    }
+                    else {
+                        output.append(" p ");
+                    }
                 } else if (pieceArray[i][j].getPieceType() == ChessPiece.PieceType.ROOK) {
-                    output.append(" R ");
+                    if (pieceArray[i][j].getTeamColor() == ChessGame.TeamColor.WHITE) {
+                        output.append(" R ");
+                    }
+                    else {
+                        output.append(" r ");
+                    }
                 } else if (pieceArray[i][j].getPieceType() == ChessPiece.PieceType.KNIGHT) {
-                    output.append(" N ");
+                    if (pieceArray[i][j].getTeamColor() == ChessGame.TeamColor.WHITE) {
+                        output.append(" N ");
+                    }
+                    else {
+                        output.append(" n ");
+                    }
                 } else if (pieceArray[i][j].getPieceType() == ChessPiece.PieceType.BISHOP) {
-                    output.append(" B ");
+                    if (pieceArray[i][j].getTeamColor() == ChessGame.TeamColor.WHITE) {
+                        output.append(" B ");
+                    }
+                    else {
+                        output.append(" b ");
+                    }
                 } else if (pieceArray[i][j].getPieceType() == ChessPiece.PieceType.KING) {
-                    output.append(" K ");
+                    if (pieceArray[i][j].getTeamColor() == ChessGame.TeamColor.WHITE) {
+                        output.append(" K ");
+                    }
+                    else {
+                        output.append(" k ");
+                    }
                 } else if (pieceArray[i][j].getPieceType() == ChessPiece.PieceType.QUEEN) {
-                    output.append(" Q ");
+                    if (pieceArray[i][j].getTeamColor() == ChessGame.TeamColor.WHITE) {
+                        output.append(" Q ");
+                    }
+                    else {
+                        output.append(" q ");
+                    }
                 }
             }
             output.append("\n");
